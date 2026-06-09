@@ -1,0 +1,69 @@
+﻿@model ManagerViewModel
+
+@{
+	Layout = "InvestigatorLayout";
+}
+
+
+<div id="content">
+	<h2>Ärenden</h2>
+	<p class="info">Du är inloggad som handläggare</p>
+
+	<!-- Filter form -->
+	<form method="¨post" asp-controller="Investigator" asp-action="Investigator">
+		<table id="InvestigatorForm">
+			<tr>
+				<td class="label">Välj status:</td>
+				<td>&nbsp;</td>
+				<td class="label">Ärendenummer:</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					<select name="StatusChoice">
+						<option value="">Välj alla</option>
+						@foreach (var status in Model.ErrandStatuses)  
+						{
+							<option value="@status.StatusName">@status.StatusName</option>
+						}
+					</select>
+				</td>
+				<td><input class="button" type="submit" value="Hämta lista" /></td>
+				<td><input name="casenumber" placeholder="Sök ärendenummer" /></td>
+				<td><input class="button" type="submit" value="Sök" /></td>
+			</tr>
+		</table>
+	</form>
+
+	<!-- Table to display errands -->
+	<table>
+		<thead>
+			<tr>
+				<th>Ärende anmält</th>
+				<th>Ärendenummer</th>
+				<th>Miljöbrott</th>
+				<th>Status</th>
+				<th>Avdelning</th>
+				<th>Handläggare</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+				@foreach (var errand in Model.Errands)
+				{
+					<tr>
+						<td>@errand.DateOfObservation.ToShortDateString()</td>
+						<td>
+						<a asp-controller="Investigator" asp-action="CrimeInvestigator" asp-route-errandId="@errand.ErrandId">@errand.RefNumber</a>
+						</td>
+						<td>@errand.TypeOfCrime</td>
+						<td>@errand.StatusName</td>
+						<td>@errand.DepartmentName</td>
+						<td>@errand.EmployeeName</td>
+					</tr>
+				}
+			
+			
+		</tbody>
+	</table>
+</div>

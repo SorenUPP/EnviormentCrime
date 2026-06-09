@@ -1,0 +1,80 @@
+﻿@model ManagerViewModel
+
+
+@{
+	Layout = "ManagerLayout";
+}
+
+
+<div id="content">
+	<h2>Ärenden</h2>
+	<p class="info">Du är inloggad som avdelningschef</p>
+
+	<form asp-controller="Manager" asp-action="Manager" method="post">
+		<table id="managerForm">
+		<tr>
+			<td class="label">Välj status:</td>
+			<td class="label">Välj handläggare:</td>
+			<td>&nbsp;</td>
+			<td class="label">Ärendenummer:</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>
+				<select name="StatusChoice">
+					<option selected="selected">Välj alla</option>
+					@foreach (var status in Model.ErrandStatuses)  // Assuming errandStatuses comes from the model
+					{
+						<option value="@status.StatusName">@status.StatusName</option>
+					}
+					</select>
+			</td>
+			<td>
+					<select name="EmployeeChoice">
+					<option selected="selected">Välj alla</option>
+						@foreach (var investigator in Model.Employees.Skip(1))
+					{
+						<option value="@investigator.EmployeeName">@investigator.EmployeeName</option>
+					}
+				</select>
+			</td>
+			<td><input class="button" type="submit" value="Hämta lista" /></td>
+			<td><input name="casenumber" /></td>
+			<td><input class="button" type="submit" value="Sök" /></td>
+		</tr>
+		</table>
+	</form>
+
+	<!--Nedan ser man en lista på ärenden-->
+	<table>
+		<thead>
+			<tr>
+				<th>Ärende anmält</th>
+				<th>Ärendenummer</th>
+				<th>Miljöbrott</th>
+				<th>Status</th>
+				<th>Avdelning</th>
+				<th>Handläggare</th>
+			</tr>
+		</thead>
+
+		@foreach (MyErrand errand in Model.Errands)
+			{
+				<tr>
+					<td>@errand.DateOfObservation.ToShortDateString()</td>
+					<td>
+					<a asp-controller="Manager" asp-action="CrimeManager" asp-route-errandId="@errand.ErrandId">@errand.RefNumber</a>
+
+					</td>
+					<td>@errand.TypeOfCrime</td>
+					<td>@errand.StatusName</td>
+					<td>@errand.DepartmentName</td>
+					<td>@errand.EmployeeName</td>	
+				</tr>
+			}
+		
+
+
+	</table>
+</div>
+

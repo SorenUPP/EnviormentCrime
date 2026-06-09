@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="sv">
+<head>
+	<meta charset="UTF-8" />
+	<title>Småstads kommun</title>
+	<link rel="stylesheet" href="../stylesheet/style.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+
+
+	<div id="wrapper">
+		<header id="logo">
+			<h1>Småstad</h1>
+			<p>Kommunen där vi bryr oss om varandra</p>
+		</header><!-- End header -->
+
+
+		<nav>
+			<ul>
+			
+				<li><a class="reports" asp-controller="Cordinator" asp-action="StartCordinator">Start(Ärenden)</a></li>
+				<li><a class="reportAdd" asp-controller="Cordinator" asp-action="ReportCrime">Rapportera brott</a></li>
+				<li class="right"><a class="logout" asp-controller="Account" asp-action="Login">Logga ut</a></li>
+			</ul>
+		</nav>
+@RenderBody()
+		<footer>
+			&copy; Småstads Kommun All rights reserved.
+		</footer>
+	</div><!-- End Content -->
+	</div><!-- End Wrapper -->
+
+</html>

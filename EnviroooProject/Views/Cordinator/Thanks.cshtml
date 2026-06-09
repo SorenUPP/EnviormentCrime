@@ -1,0 +1,14 @@
+﻿@model Errand
+
+@{
+    Layout = "CordinatorLayout";
+}
+
+<div id="content">
+	<h2>Tack för din anmälan</h2>
+	<p class="info">Du är inloggad som samordnare</p>
+
+
+	@await Component.InvokeAsync("Thanks")
+
+	<p><a class="button" asp-controller="cordinator" asp-action="startCordinator">Avsluta rapporteringen</a></p>

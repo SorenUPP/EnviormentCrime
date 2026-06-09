@@ -1,0 +1,48 @@
+﻿@model EnviroooProject.Models.Errand
+
+@{
+    Layout = "CordinatorLayout";
+}
+
+<div id="content">
+	<h2>Rapportera brott</h2>
+	<p class="info">Du är inloggad som samordnare</p>
+
+	<p>Fyll i formuläret nedan, alla rutor markerade med stjärna (*) måste fyllas i</p>
+	<form method="post" asp-asp-controller="cordinator" asp-action="validate">
+		<p>
+			<input type="hidden" name="isSubmitted" value="true" />
+		</p>
+		<p>
+			<label asp-for="Place"></label><br />
+			<input asp-for="Place" /> *
+			<span asp-validation-for="Place"></span>
+		</p>
+		<p>
+			<label asp-for="TypeOfCrime"></label><br />
+			<input asp-for="TypeOfCrime" /> *
+			<span asp-validation-for="TypeOfCrime"></span>
+		</p>
+		<p>
+			<label asp-for="DateOfObservation"></label><br />
+			<input asp-for="DateOfObservation" />*
+			<span asp-validation-for="DateOfObservation"></span>
+		</p>
+		<p>
+			<label asp-for="InformerName"></label><br />
+			<input asp-for="InformerName" /> *
+			<span asp-validation-for="InformerName"></span>
+		</p>
+		<p>
+			<label asp-for="InformerPhone"></label><br />
+			<input asp-for="InformerPhone" /> *
+			<span asp-validation-for="InformerPhone"></span>
+		</p>
+		<p>
+			<label asp-for="Observation"></label><br />
+			<textarea asp-for="Observation" rows="5" cols="16"></textarea>
+		</p>
+		<p>
+			<input class="button" type="submit" value="Skicka in" />
+		</p>
+	</form>

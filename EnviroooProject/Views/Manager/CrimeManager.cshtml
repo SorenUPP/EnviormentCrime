@@ -1,0 +1,35 @@
+﻿@model ManagerViewModel
+
+@{
+	Layout = "ManagerLayout";
+}
+
+<div id="content">
+<h2>Detaljer för ärendet</h2>
+<p class="info">Du är inloggad som avdelningschef</p>
+
+	@await Component.InvokeAsync("ErrandDetail", ViewBag.Id)
+
+	<section id="bottomColumn">
+		<h3>Redigera ärende</h3>
+		<p>
+			Ange handläggare:
+			<form asp-controller="Manager" asp-action="SavedManager" method="Post">
+			<select name="ChosenManager">
+				<option selected="selected">Välj</option>
+					@foreach (var investigator in Model.Employees.Skip(1))
+					{
+						<option value="@investigator.EmployeeName">@investigator.EmployeeName</option>
+					}
+			</select>
+
+				<!--Radio button-->
+
+				<p><input type="checkbox" name="noAction" value="true" /> Ingen åtgärd: 
+					<input type="text" name="reason" value="Ange motivering" /></p>
+	
+		<!--Submit button-->
+		<p><input class="button" type="submit" value="Spara" /></p>
+			</form>
+			</p>			
+	</section>
