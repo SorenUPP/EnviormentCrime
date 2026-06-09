@@ -9,10 +9,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddTransient<IEnviormentRepository, EFEnviormentRepository>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sqlOptions => sqlOptions.EnableRetryOnFailure()));
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"
-)));
+options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"), sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
 
